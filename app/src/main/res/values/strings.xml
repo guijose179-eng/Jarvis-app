@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jarvis</string>
+    <string name="accessibility_service_description">Permite que o Jarvis abra aplicativos e execute ações na tela a partir de comandos de voz.</string>
+</resources>
