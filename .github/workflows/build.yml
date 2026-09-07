@@ -1,0 +1,33 @@
+name: Compilar Jarvis APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Dar permissão ao Gradle
+        run: chmod +x gradlew || true
+
+      - name: Gerar wrapper do Gradle (caso não exista)
+        run: gradle wrapper --gradle-version 8.6 || true
+
+      - name: Compilar APK de debug
+        run: ./gradlew assembleDebug || gradle assembleDebug
+
+      - name: Disponibilizar o APK para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: Jarvis-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
